@@ -1,10 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const mercadopago = require("mercadopago");
+const { MercadoPagoConfig } = require("mercadopago");
 
-mercadopago.configure({
-  access_token: process.env.MP_ACCESS_TOKEN,
+const mp = new MercadoPagoConfig({
+  accessToken: process.env.MP_ACCESS_TOKEN,
 });
 
 const app = express();
@@ -48,4 +48,9 @@ app.post("/create_preference", async (req, res) => {
     console.error("❌ Error al crear preferencia:", error);
     res.status(500).send(`Error al crear preferencia: ${error.message}`);
   }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Servidor corriendo en puerto " + PORT);
 });
