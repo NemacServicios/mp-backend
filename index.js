@@ -3,7 +3,6 @@ const cors = require("cors");
 require("dotenv").config();
 const mercadopago = require("mercadopago");
 
-// ✅ Configuración del SDK clásico
 mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
