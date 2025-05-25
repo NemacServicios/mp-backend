@@ -31,7 +31,7 @@ app.post("/create_preference", async (req, res) => {
       auto_return: "approved",
     };
 
-    const result = await mercadopago.preferences.create(preference);
+    console.log("Preferencia creada:", JSON.stringify(result, null, 2));
 
     res.json({
       id: result.body.id,
