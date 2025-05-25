@@ -32,13 +32,11 @@ app.post("/create_preference", async (req, res) => {
       auto_return: "approved",
     };
 
-    // **AQUÍ falta crear la preferencia usando mercadopago SDK**
+    // ESTA LÍNEA ES FUNDAMENTAL
     const result = await mercadopago.preferences.create(preference);
 
-    // **Ahora sí podemos imprimir el resultado:**
     console.log("Preferencia creada:", JSON.stringify(result, null, 2));
 
-    // **Responder con el id y la URL para iniciar el pago**
     res.json({
       id: result.body.id,
       init_point: result.body.init_point,
@@ -47,10 +45,5 @@ app.post("/create_preference", async (req, res) => {
     console.error("❌ Error al crear preferencia:", error);
     res.status(500).send("Error al crear preferencia");
   }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto " + PORT);
 });
 
