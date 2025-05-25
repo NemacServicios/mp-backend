@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const mercadopago = require("mercadopago");
 
+// Configurar MercadoPago
 mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
@@ -31,8 +32,13 @@ app.post("/create_preference", async (req, res) => {
       auto_return: "approved",
     };
 
+    // **AQUÍ falta crear la preferencia usando mercadopago SDK**
+    const result = await mercadopago.preferences.create(preference);
+
+    // **Ahora sí podemos imprimir el resultado:**
     console.log("Preferencia creada:", JSON.stringify(result, null, 2));
 
+    // **Responder con el id y la URL para iniciar el pago**
     res.json({
       id: result.body.id,
       init_point: result.body.init_point,
